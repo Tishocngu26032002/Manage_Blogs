@@ -1,0 +1,10 @@
+<!-- upload.component.html -->
+<div>
+  <h2>Upload Ảnh</h2>
+  <form (submit)="onSubmit($event)">
+    <input type="file" (change)="onFileSelected($event)" />
+    <button type="submit">Upload</button>
+  </form>
+  <div *ngIf="message">{{ message }}</div>
+  <div *ngIf="url">{{url}}</div>
+</div>

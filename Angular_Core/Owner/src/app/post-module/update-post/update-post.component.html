@@ -1,0 +1,145 @@
+<section class="home-section">
+    <div class="container">
+        <h1>Update</h1>
+        <div class="container-languages">
+            <nav>
+                <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                    <a class="nav-link active" id="nav-home-tab" data-toggle="tab" data-target="#nav-home" type="button"
+                        (click)="currentTab = 'vn'" role="tab" aria-controls="nav-home" aria-selected="true"
+                        [class.active]="currentTab === 'vn'">Vietnamese</a>
+                    <a class="nav-link" id="nav-profile-tab" data-toggle="tab" data-target="#nav-profile" type="button"
+                        (click)="currentTab = 'en'" role="tab" aria-controls="nav-profile" aria-selected="false"
+                        [class.active]="currentTab === 'en'">English</a>
+                    <a class="nav-link" id="nav-contact-tab" data-toggle="tab" data-target="#nav-contact" type="button"
+                        (click)="currentTab = 'cn'" role="tab" aria-controls="nav-contact" aria-selected="false"
+                        [class.active]="currentTab === 'cn'">Chinese</a>
+                    <button (click)="updatePost()" style="margin-left: auto;">Submit</button>
+                </div>
+            </nav>
+
+            <div class="tab-content" id="nav-tabContent">
+                <!-- Việt Nam -->
+                <div *ngIf="currentTab === 'vn'" class="tab-pane fade show active" id="nav-home" role="tabpanel"
+                    aria-labelledby="nav-home-tab" style="display: flex;">
+                    <!-- Nội dung Vietnamese -->
+                    <div id="vietnamese" class="col-md-8">
+                        <!-- Title and Content -->
+                        <div class="mb-3 container-content">
+                            <div class="form-group">
+                                <label for="inputTitleVN" class="col-form-label">Title:</label>
+                                <input id="inputTitleVN" type="text" class="form-control" name="title"
+                                    [(ngModel)]="titleVN" />
+                            </div>
+                            <div class="form-group">
+                                <label for="descriptionVN">Content</label>
+                                <ckeditor [editor]="EditorVN" (ready)="onReady($event)" [(ngModel)]="contentVN">
+                                </ckeditor>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Categories -->
+                    <div class="col-md-4 mb-3 cate-lang-btn">
+                        <div class="form-group">
+                            <label for="categoryVN" class="col-form-label">Categories</label>
+                            <select name="Category" id="categoryVN" class="form-control" [(ngModel)]="category">
+                                <option value="1">Truyện ngắn</option>
+                                <option value="2">Bóng đá</option>
+                                <option value="3">Du lịch</option>
+                                <option value="4">Tin tức</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group" style="margin-bottom: 15px;">
+                            <label for="statusVN" class="form-label">Status:</label>
+                            <div id="statusVN" class="switch" style="margin: 20px;">
+                                <input type="checkbox" id="switchVN" [(ngModel)]="status">
+                                <label for="switchVN"></label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- English -->
+                <div *ngIf="currentTab === 'en'" class="tab-pane fade show active" id="nav-profile" role="tabpanel"
+                    aria-labelledby="nav-profile-tab" style="display: flex;">
+                    <!-- Nội dung English -->
+                    <div id="english" class="col-md-8">
+                        <!-- Title and Content -->
+                        <div class="mb-3 container-content">
+                            <div class="form-group">
+                                <label for="inputTitleEN" class="col-form-label">Title:</label>
+                                <input id="inputTitleEN" type="text" class="form-control" name="title"
+                                    [(ngModel)]="titleEN" />
+                            </div>
+                            <div class="form-group">
+                                <label for="descriptionEN">Content</label>
+                                <ckeditor [editor]="EditorEN" (ready)="onReady($event)" [(ngModel)]="contentEN">
+                                </ckeditor>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Categories -->
+                    <div class="col-md-4 mb-3 cate-lang-btn">
+                        <div class="form-group">
+                            <label for="categoryEN" class="col-form-label">Categories</label>
+                            <select name="Category" id="categoryEN" class="form-control" [ngModel]="category">
+                                <option value="1">Truyện ngắn</option>
+                                <option value="2">Bóng đá</option>
+                                <option value="3">Du lịch</option>
+                                <option value="4">Tin tức</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group" style="margin-bottom: 15px;">
+                            <label for="statusEN" class="form-label">Status:</label>
+                            <div id="statusEN" class="switch" style="margin: 20px;">
+                                <input type="checkbox" id="switchEN" [(ngModel)]="status">
+                                <label for="switchEN"></label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Chinese -->
+                <div *ngIf="currentTab === 'cn'" class="tab-pane fade show active" id="nav-contact" role="tabpanel"
+                    aria-labelledby="nav-contact-tab" style="display: flex;">
+                    <!-- Nội dung Chinese -->
+                    <div class="col-md-8 mb-3 container-content">
+                        <div class="form-group">
+                            <label for="inputTitleCN" class="col-form-label">Title:</label>
+                            <input id="inputTitleCN" type="text" class="form-control" name="title"
+                                [(ngModel)]="titleCN" />
+                        </div>
+                        <div class="form-group">
+                            <label for="descriptionCN">Content</label>
+                            <ckeditor [editor]="EditorCN" (ready)="onReady($event)" [(ngModel)]="contentCN"></ckeditor>
+                        </div>
+                    </div>
+
+                    <!-- Categories -->
+                    <div class="col-md-4 mb-3 cate-lang-btn">
+                        <div class="form-group">
+                            <label for="categoryCN" class="col-form-label">Categories</label>
+                            <select name="Category" id="categoryCN" class="form-control" [(ngModel)]="category">
+                                <option value="1">Truyện ngắn</option>
+                                <option value="2">Bóng đá</option>
+                                <option value="3">Du lịch</option>
+                                <option value="4">Tin tức</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group" style="margin-bottom: 15px;">
+                            <label for="statusCN" class="form-label">Status:</label>
+                            <div id="statusCN" class="switch" style="margin: 20px;">
+                                <input type="checkbox" id="switchCN" [(ngModel)]="status">
+                                <label for="switchCN"></label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

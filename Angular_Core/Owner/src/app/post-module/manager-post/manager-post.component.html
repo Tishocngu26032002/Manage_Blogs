@@ -1,0 +1,141 @@
+<section class="home-section">
+    <div class="container pb-3">
+        <h3 class="text-divider">Manage Post</h3>
+        <div class="container-btn">
+            <a routerLink="/post/create-post"><button class="btn btn-primary">Create Post</button></a>
+            <form class="form-inline my-2 my-lg-0">
+                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-primary my-2 my-sm-0" type="submit"><fa-icon [icon]="search"></fa-icon></button>
+            </form>
+        </div>
+
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">STT</th>
+                        <th scope="col">Title</th>
+                        <th scope="col">Content</th>
+                        <th scope="col" style="width: max-content;">Release date</th>
+                        <th scope="col">Status</th>
+                        <th scope="col">Category</th>
+                        <th scope="col">Action</th>
+                    </tr>
+                </thead>
+                <tbody *ngFor="let item of lists; let i= index">
+                    <tr>
+                        <th scope="row">{{i+1}}</th>
+                        <td hidden>{{item.id}}</td>
+                        <td>{{getFirstNonEmptyTitle(item.contentposts)}}</td>
+                        <td>
+                            <div class="pContent" [innerHTML]="getFirstNonEmptyContent(item.contentposts)">
+                            </div>
+                        </td>
+                        <td>{{item.createdAt}}</td>
+                        <td>{{item.status}}</td>
+                        <td>{{item.post_category.category.title}}</td>
+                        <td>
+                            <div class="group--btn__ud">
+                                <button class="btn btn-primary" (click)="update(item.id)"><fa-icon
+                                        [icon]="edit"></fa-icon></button>
+                                <button class="btn btn-danger"><fa-icon [icon]="trash"></fa-icon></button>
+                                <button class="btn btn-danger" (click)="detailFunction(item.id)"><fa-icon
+                                        [icon]="detail"></fa-icon></button>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="container-languages" style="position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 50%;
+            height: 400px;
+            background-color: aqua;
+            z-index: 1050;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+            border-radius: 5px;
+            padding: 20px;
+            overflow: auto;" *ngIf="show">
+            <button
+                style="position: absolute; top: 10px; right: 10px; border: none; background: transparent; font-size: 20px; cursor: pointer;"
+                (click)="closeModal()">×</button>
+            <nav>
+                <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                    <a class="nav-link active" id="nav-home-tab" data-toggle="tab" data-target="#nav-home" type="button"
+                        (click)="currentTab = 'vn'" role="tab" aria-controls="nav-home" aria-selected="true"
+                        [class.active]="currentTab === 'vn'">Vietnamese</a>
+                    <a class="nav-link" id="nav-profile-tab" data-toggle="tab" data-target="#nav-profile" type="button"
+                        (click)="currentTab = 'en'" role="tab" aria-controls="nav-profile" aria-selected="false"
+                        [class.active]="currentTab === 'en'">English</a>
+                    <a class="nav-link" id="nav-contact-tab" data-toggle="tab" data-target="#nav-contact" type="button"
+                        (click)="currentTab = 'cn'" role="tab" aria-controls="nav-contact" aria-selected="false"
+                        [class.active]="currentTab === 'cn'">Chinese</a>
+                </div>
+            </nav>
+
+            <div *ngIf="currentTab === 'vn'" class="tab-pane fade show active" id="nav-home" role="tabpanel"
+                aria-labelledby="nav-home-tab" style="display: flex;">
+                <!-- Nội dung Vietnamese -->
+                <div id="vietnamese" class="col-md-8" [innerHTML]="contentVN">
+                    <!-- Title and Content -->
+                </div>
+
+                <!-- Categories -->
+                <div class="col-md-4 mb-3 cate-lang-btn">
+                </div>
+            </div>
+
+            <!-- English -->
+            <div *ngIf="currentTab === 'en'" class="tab-pane fade show active" id="nav-profile" role="tabpanel"
+                aria-labelledby="nav-profile-tab" style="display: flex;">
+                <!-- Nội dung English -->
+                <div id="english" class="col-md-8" [innerHTML]="contentEN">
+                    <!-- Title and Content -->
+                </div>
+
+                <!-- Categories -->
+                <div class="col-md-4 mb-3 cate-lang-btn">
+                </div>
+            </div>
+
+            <!-- Chinese -->
+            <div *ngIf="currentTab === 'cn'" class="tab-pane fade show active" id="nav-contact" role="tabpanel"
+                aria-labelledby="nav-contact-tab" style="display: flex;">
+                <!-- Nội dung Chinese -->
+                <div class="col-md-8 mb-3 container-content" [innerHTML]="contentCN">
+                </div>
+
+                <!-- Categories -->
+                <div class="col-md-4 mb-3 cate-lang-btn">
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>
+
+<!-- <script>
+    let sidebar = document.querySelector(".sidebar");
+    let closeBtn = document.querySelector("#btn");
+    closeBtn.addEventListener("click", () => {
+        sidebar.classList.toggle("open");
+        menuBtnChange();//calling the function(optional)
+    });
+
+    let closeBtn1 = document.querySelector(".logo_name");
+    closeBtn1.addEventListener("click", () => {
+        sidebar.classList.toggle("open");
+        menuBtnChange();//calling the function(optional)
+    });
+    // following are the code to change sidebar button(optional)
+    function menuBtnChange() {
+        if (sidebar.classList.contains("open")) {
+            closeBtn.classList.replace("bx-menu", "bx-menu-alt-right");//replacing the iocns class
+        } else {
+            closeBtn.classList.replace("bx-menu-alt-right", "bx-menu");//replacing the iocns class
+        }
+    }
+</script> -->
